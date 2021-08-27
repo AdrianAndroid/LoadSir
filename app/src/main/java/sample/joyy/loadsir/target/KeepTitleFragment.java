@@ -1,0 +1,76 @@
+package com.joyy.loadsir.target;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+
+import com.kingja.loadsir.callback.Callback;
+import com.kingja.loadsir.core.LoadService;
+import com.kingja.loadsir.core.LoadSir;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
+import com.joyy.loadsir.PostUtil;
+import com.joyy.loadsir.R;
+import com.joyy.loadsir.callback.EmptyCallback;
+import com.joyy.loadsir.callback.LoadingCallback;
+
+/**
+ * Description:
+ * Create Time:2017/9/26 14:33
+ * Author:KingJA
+ * Email:kingjavip@gmail.com
+ */
+public class KeepTitleFragment extends Fragment {
+
+    private LoadService loadService;
+    @BindView(R.id.iv_back)
+    ImageView mIvBack;
+    private Unbinder unBinder;
+    private ViewGroup rootView;
+
+    @OnClick(R.id.iv_back)
+    public void onBack() {
+        getActivity().finish();
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        LinearLayout contentView = rootView.findViewById(R.id.ll_content);
+        LoadSir loadSir = new LoadSir.Builder()
+                .addCallback(new EmptyCallback())
+                .addCallback(new LoadingCallback())
+                .setDefaultCallback(LoadingCallback.class)
+                .build();
+        loadService = loadSir.register(contentView, new Callback.OnReloadListener() {
+            @Override
+            public void onReload(View v) {
+                loadService.showSuccess();
+            }
+        });
+        PostUtil.postCallbackDelayed(loadService, EmptyCallback.class, 1200);
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle
+            savedInstanceState) {
+        rootView = (ViewGroup) inflater.inflate(R.layout.title_title_bar, container, false);
+        unBinder = ButterKnife.bind(this, rootView);
+        return rootView;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        unBinder.unbind();
+    }
+}

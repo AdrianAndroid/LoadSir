@@ -1,1 +1,2 @@
 include ':app', ':loadsir'
+include ':kapp', ':kloadsir'

@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="12dp"
-        tools:context="sample.kingja.loadsir.MainActivity">
+        tools:context="com.joyy.loadsir.MainActivity">
 
 
         <Button
