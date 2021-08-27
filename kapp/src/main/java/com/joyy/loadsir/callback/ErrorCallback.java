@@ -1,8 +1,6 @@
 package com.joyy.loadsir.callback;
 
 
-import com.kingja.loadsir.callback.Callback;
-
 import com.joyy.loadsir.R;
 
 /**

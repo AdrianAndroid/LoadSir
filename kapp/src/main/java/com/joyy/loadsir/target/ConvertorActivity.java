@@ -10,12 +10,12 @@ import com.joyy.loadsir.callback.EmptyCallback;
 import com.joyy.loadsir.callback.ErrorCallback;
 import com.joyy.loadsir.callback.LoadingCallback;
 
-import com.kingja.loadsir.callback.Callback;
-import com.kingja.loadsir.callback.SuccessCallback;
-import com.kingja.loadsir.core.LoadService;
-import com.kingja.loadsir.core.LoadSir;
+import com.joyy.loadsir.callback.Callback;
+import com.joyy.loadsir.callback.SuccessCallback;
+import com.joyy.loadsir.core.LoadService;
+import com.joyy.loadsir.core.LoadSir;
 
-import com.kingja.loadsir.core.Convertor;
+import com.joyy.loadsir.core.Convertor;
 
 import java.util.ArrayList;
 import java.util.List;

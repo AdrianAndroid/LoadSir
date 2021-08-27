@@ -11,10 +11,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.joyy.loadsir.callback.EmptyCallback;
 import com.joyy.loadsir.callback.LoadingCallback;
 
-import com.kingja.loadsir.callback.Callback;
-import com.kingja.loadsir.core.LoadService;
-import com.kingja.loadsir.core.LoadSir;
-import com.kingja.loadsir.core.Transport;
+import com.joyy.loadsir.callback.Callback;
+import com.joyy.loadsir.core.LoadService;
+import com.joyy.loadsir.core.LoadSir;
+import com.joyy.loadsir.core.Transport;
 
 import com.joyy.loadsir.R;
 import com.joyy.loadsir.PostUtil;

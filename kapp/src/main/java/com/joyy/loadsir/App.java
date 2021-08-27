@@ -7,7 +7,7 @@ import com.joyy.loadsir.callback.EmptyCallback;
 import com.joyy.loadsir.callback.ErrorCallback;
 import com.joyy.loadsir.callback.LoadingCallback;
 import com.joyy.loadsir.callback.TimeoutCallback;
-import com.kingja.loadsir.core.LoadSir;
+import com.joyy.loadsir.core.LoadSir;
 import com.squareup.leakcanary.LeakCanary;
 
 /**

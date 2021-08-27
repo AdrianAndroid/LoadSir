@@ -7,8 +7,6 @@ import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.Toast;
 
-import com.kingja.loadsir.callback.Callback;
-
 import com.joyy.loadsir.R;
 
 /**

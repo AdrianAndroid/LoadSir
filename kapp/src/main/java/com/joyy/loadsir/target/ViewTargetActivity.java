@@ -5,9 +5,9 @@ import android.widget.ImageView;
 
 import com.joyy.loadsir.callback.LoadingCallback;
 import com.joyy.loadsir.callback.TimeoutCallback;
-import com.kingja.loadsir.callback.Callback;
-import com.kingja.loadsir.core.LoadService;
-import com.kingja.loadsir.core.LoadSir;
+import com.joyy.loadsir.callback.Callback;
+import com.joyy.loadsir.core.LoadService;
+import com.joyy.loadsir.core.LoadSir;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;

@@ -3,8 +3,8 @@ package com.joyy.loadsir;
 import android.os.Handler;
 import android.os.Looper;
 
-import com.kingja.loadsir.callback.Callback;
-import com.kingja.loadsir.core.LoadService;
+import com.joyy.loadsir.callback.Callback;
+import com.joyy.loadsir.core.LoadService;
 
 /**
  * Description:TODO

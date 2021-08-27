@@ -10,9 +10,9 @@ import android.view.ViewGroup;
 import com.joyy.loadsir.callback.CustomCallback;
 import com.joyy.loadsir.callback.ErrorCallback;
 import com.joyy.loadsir.callback.LoadingCallback;
-import com.kingja.loadsir.callback.Callback;
-import com.kingja.loadsir.core.LoadService;
-import com.kingja.loadsir.core.LoadSir;
+import com.joyy.loadsir.callback.Callback;
+import com.joyy.loadsir.core.LoadService;
+import com.joyy.loadsir.core.LoadSir;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
