@@ -18,7 +18,7 @@ import kotlin.reflect.KClass
 @SuppressLint("ViewConstructor")
 class LoadLayout(context: Context) : FrameLayout(context) {
 
-    private val CALLBACK_CUSTOM_INDEX = 1
+    private val CALLBACK_CUSTOM_INDEX = 0
 
     private val callbacks = HashMap<KClass<out Callback>, Callback>()
 
@@ -63,21 +63,17 @@ class LoadLayout(context: Context) : FrameLayout(context) {
     fun showCallbackView(status: KClass<out Callback>) {
         // 先判断之前是否就是这个view，就不用动了
         if (curCallback != null && curCallback != status) {
-            callbacks[curCallback]?.run {
-                removeView(this.getDisplayView())
-                onDetach()
-            }
-        }
-
-        if (childCount > 1) {
-            removeViewAt(CALLBACK_CUSTOM_INDEX)
+            val callback = callbacks[curCallback]
+            if (childCount > 1) removeAllViews()
+            callback?.onDetach()
         }
         val successCallback = callbacks[status]
         if (successCallback == null) {
             throwNoExits(status)
         } else {
-            addView(successCallback.getDisplayView())
-            successCallback.onAttach(context, successCallback.getDisplayView())
+            val displayView = successCallback.getDisplayView()
+            addView(displayView)
+            successCallback.onAttach(context, displayView)
         }
         curCallback = status
     }

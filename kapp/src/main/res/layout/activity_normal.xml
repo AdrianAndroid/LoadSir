@@ -6,4 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".target.NormalActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="Hello World!"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
