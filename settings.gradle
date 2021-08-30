@@ -1,2 +1,2 @@
-include ':app', ':loadsir'
+//include ':app', ':loadsir'
 include ':kapp', ':kloadsir'

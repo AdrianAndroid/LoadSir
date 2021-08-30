@@ -1,25 +1,22 @@
 package com.joyy.loadsir.target;
 
 import android.os.Bundle;
-
-import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.kingja.loadsir.callback.Callback;
-import com.kingja.loadsir.core.LoadService;
-import com.kingja.loadsir.core.LoadSir;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import butterknife.ButterKnife;
 import com.joyy.loadsir.PostUtil;
 import com.joyy.loadsir.R;
 import com.joyy.loadsir.callback.CustomCallback;
 import com.joyy.loadsir.callback.ErrorCallback;
 import com.joyy.loadsir.callback.LoadingCallback;
+import com.kingja.loadsir.core.LoadService;
+import com.kingja.loadsir.core.LoadSir;
+
+
+
 
 /**
  * Description:TODO
