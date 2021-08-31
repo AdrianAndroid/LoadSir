@@ -7,7 +7,7 @@ import android.view.View
  * Author: flannery
  * Description:
  */
-class SuccessCallback(val rootView: View) : Callback() {
+class SuccessCallback(private val rootView: View) : Callback() {
     override fun onRootView(): View {
         return rootView
     }

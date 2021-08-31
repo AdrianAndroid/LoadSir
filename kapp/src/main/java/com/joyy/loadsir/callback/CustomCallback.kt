@@ -16,7 +16,7 @@ class CustomCallback : Callback() {
         return R.layout.layout_custom
     }
 
-    override fun onReloadEvent(context: Context, view: View): Boolean {
+    override fun onReloadEvent(view: View): Boolean {
         Toast.makeText(context.applicationContext, "Hello buddy, how r u! :p", Toast.LENGTH_SHORT)
             .show()
         view.findViewById<View>(R.id.iv_gift).setOnClickListener {

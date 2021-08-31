@@ -16,6 +16,9 @@
             android:name=".target.NormalActivity"
             android:exported="true" />
         <activity
+            android:name=".target.ConstraintLayoutActivity"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

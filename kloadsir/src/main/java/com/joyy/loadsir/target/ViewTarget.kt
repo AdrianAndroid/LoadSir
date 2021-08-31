@@ -17,15 +17,9 @@ class ViewTarget : ITarget {
         if (target is View) {
             val contentParent = target.parent as? ViewGroup
                 ?: throw java.lang.IllegalArgumentException("LoadSir 需要有父容器！")
-            var childIndex = 0
-            for (index in 0 until contentParent.childCount) {
-                if (target == contentParent.getChildAt(index)) {
-                    childIndex = index
-                    break
-                }
-            }
+            val childIndex = contentParent.indexOfChild(target)
             // 移除掉需要加载loading的view
-            contentParent.removeView(target)
+            contentParent.removeViewAt(childIndex) // 移除掉这个View
 
             val lp = target.layoutParams
             val loadLayout = LoadLayout(target.context)

@@ -15,8 +15,8 @@ import kotlin.reflect.KClass
  */
 class LoadService(
     private var loadLayout: LoadLayout,
-    private var callbacks: List<Callback>,
-    private var defaultCallback: KClass<out Callback>,
+    callbacks: List<Callback>,
+    defaultCallback: KClass<out Callback>,
     private val onClick: ((LoadService, View) -> Unit)
 ) {
 

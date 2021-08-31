@@ -12,48 +12,48 @@ import java.io.*
 open class Callback : Serializable {
 
     lateinit var context: Context
-    private var rootView: View? = null
+    private lateinit var rootView: View
     var onClickCallback: ((view: View) -> Unit)? = null // 点击事件的回调
 
     open fun onCreateView(): Int = 0
     open fun onAttach(view: View) {}
     open fun onDetach() {}
     open fun onRootView(): View? = null
-    open fun onReloadEvent(context: Context, view: View): Boolean = false
-    open fun onViewCreated(context: Context, view: View) {}
+    open fun onReloadEvent(view: View): Boolean = false
+    open fun onViewCreated(view: View) {}
 
     fun getDisplayView(): View { // 不能为空， 本来就是要用的
-        if (rootView != null)
-            return rootView as View
-        rootView = onRootView() // 保留要使用的View
-        if (rootView == null) {
-            if (!::context.isInitialized) throw IllegalArgumentException("context不能为空的！")
-            if (rootView != null) return rootView as View
-            val resId: Int = onCreateView()
-            if (rootView == null) rootView = View.inflate(context, resId, null)
-            rootView?.let { v ->
-                onClickEvent(v)
-                onViewCreated(context, v)
-            }
-        }
-        return rootView!!
+        return obtainRootView()
     }
 
     // 默认的是整块的点击事件
-    open fun onClickEvent(view: View?) {
+    // 如果想缩小点击的范围，请自行继承这个方法
+    open fun onClickEvent(view: View) {
         // 父布局的点击事件
-        view?.setOnClickListener { v ->
-            if (!onReloadEvent(view.context, v)) {
+        view.setOnClickListener { v ->
+            if (!onReloadEvent(v)) {
                 onClickCallback?.invoke(v)
             }
         }
     }
 
-    fun obtainRootView(): View = if (rootView == null) {
-        rootView = View.inflate(context, onCreateView(), null)
-        rootView as View
-    } else {
-        rootView as View
+    fun obtainRootView(): View {
+        if (::rootView.isInitialized) return rootView.apply {
+            onClickEvent(this)
+            onViewCreated(this)
+        }
+        onRootView()?.let { rootView = it }
+        if (::rootView.isInitialized) return rootView.apply {
+            onClickEvent(this)
+            onViewCreated(this)
+        }
+        View.inflate(context, onCreateView(), null)?.let { rootView = it }
+        if (::rootView.isInitialized) return rootView.apply {
+            onClickEvent(this)
+            onViewCreated(this)
+        }
+
+        throw IllegalArgumentException("必须又一个RootView(TARGET)")
     }
 
     fun setCallback(context: Context, onReload: (view: View) -> Unit) {
