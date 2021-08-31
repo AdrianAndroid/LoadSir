@@ -21,6 +21,9 @@ public class ActivityTarget implements ITarget {
         return target instanceof Activity;
     }
 
+    //1. 给原来的内容，重新添加一个FrameLayout容器
+    //2. 用SuccessCallback 将原来的View保存起来，这时view已经不在容器上
+    //3. 通过找到这个容器，替换View
     @Override
     public LoadLayout replaceView(Object target, Callback.OnReloadListener onReloadListener) {
         Activity activity = (Activity) target;

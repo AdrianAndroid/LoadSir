@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:context=".target.Normal2Activity">
+
+    <LinearLayout
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/id1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="btnClick"
+            android:text="添加两层"
+            tools:ignore="UsingOnClickInXml" />
+
+        <Button
+            android:id="@+id/id2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="btnClick"
+            android:text="切换两个图层"
+            tools:ignore="UsingOnClickInXml" />
+
+        <Button
+            android:id="@+id/id3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="btnClick"
+            android:text="切换两个图层,并添加到顶层"
+            tools:ignore="UsingOnClickInXml" />
+
+        <Button
+            android:id="@+id/id4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="btnClick"
+            android:text="测量两个View在容器中的位置"
+            tools:ignore="UsingOnClickInXml" />
+
+        <Button
+            android:id="@+id/id5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="btnClick"
+            android:text="替换顶层的图层" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/awkward" />
+
+    </FrameLayout>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

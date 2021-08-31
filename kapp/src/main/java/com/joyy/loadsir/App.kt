@@ -15,7 +15,7 @@ class App : Application() {
 
         LoadSir.init(
             LoadingCallback::class,
-            ErrorCallback(),
+            ErrorCallback(), // 后期可以改成使用反射创建
             EmptyCallback(),
             LoadingCallback(),
             TimeoutCallback(),

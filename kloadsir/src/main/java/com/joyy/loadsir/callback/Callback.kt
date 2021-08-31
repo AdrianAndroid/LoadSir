@@ -16,13 +16,15 @@ open class Callback : Serializable {
     var onClickCallback: ((view: View) -> Unit)? = null // 点击事件的回调
 
     open fun onCreateView(): Int = 0
-    open fun onAttach(context: Context, view: View) {}
+    open fun onAttach(view: View) {}
     open fun onDetach() {}
     open fun onRootView(): View? = null
     open fun onReloadEvent(context: Context, view: View): Boolean = false
     open fun onViewCreated(context: Context, view: View) {}
 
     fun getDisplayView(): View { // 不能为空， 本来就是要用的
+        if (rootView != null)
+            return rootView as View
         rootView = onRootView() // 保留要使用的View
         if (rootView == null) {
             if (!::context.isInitialized) throw IllegalArgumentException("context不能为空的！")
@@ -47,7 +49,12 @@ open class Callback : Serializable {
         }
     }
 
-    fun obtainRootView(): View = rootView ?: View.inflate(context, onCreateView(), null)
+    fun obtainRootView(): View = if (rootView == null) {
+        rootView = View.inflate(context, onCreateView(), null)
+        rootView as View
+    } else {
+        rootView as View
+    }
 
     fun setCallback(context: Context, onReload: (view: View) -> Unit) {
         this.context = context

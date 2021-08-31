@@ -3,7 +3,9 @@ package com.joyy.loadsir.core
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Looper
+import android.util.Log
 import android.view.View
+import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.joyy.loadsir.callback.Callback
 import com.joyy.loadsir.callback.SuccessCallback
@@ -17,12 +19,14 @@ import kotlin.reflect.KClass
  */
 @SuppressLint("ViewConstructor")
 class LoadLayout(context: Context) : FrameLayout(context) {
-
-    private val CALLBACK_CUSTOM_INDEX = 0
+    companion object {
+        fun log(msg: Any) {
+            Log.i("[LoadLayout]", "$msg")
+        }
+    }
 
     private val callbacks = HashMap<KClass<out Callback>, Callback>()
 
-    //    var preCallback: KClass<out Callback>? = null
     var curCallback: KClass<out Callback>? = null
 
     val throwNoExits: (o: Any) -> Unit = {
@@ -38,12 +42,13 @@ class LoadLayout(context: Context) : FrameLayout(context) {
     fun setupSuccessLayout(callback: Callback) {
         addCallback(callback)
         val successView = callback.getDisplayView() // loading要显示的这个View
-        successView.visibility = View.INVISIBLE // 先隐藏
+//        successView.visibility = View.INVISIBLE // 先隐藏
         val layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
         addView(successView, layoutParams)
         curCallback = SuccessCallback::class
     }
 
+    // 注册新的CallBack
     fun setupCallback(targetCallback: Callback, callback: ((View) -> Unit)) {
         val cloneCallback = targetCallback.copy()
         cloneCallback.setCallback(context, callback)
@@ -53,7 +58,7 @@ class LoadLayout(context: Context) : FrameLayout(context) {
     fun showCallback(callback: KClass<out Callback>) {
         if (!callbacks.containsKey(callback)) throwNoExits(callback)
         if (Looper.myLooper() == Looper.getMainLooper()) {
-            post { showCallbackView(callback) }
+            showCallbackView(callback)
         } else {
             post { showCallbackView(callback) }
         }
@@ -61,26 +66,41 @@ class LoadLayout(context: Context) : FrameLayout(context) {
 
     // 更换LoadingView
     fun showCallbackView(status: KClass<out Callback>) {
+        log("preStatus = $status index=${indexOfChild(callbacks[curCallback]?.getDisplayView())} childCount=${childCount}")
+
         // 先判断之前是否就是这个view，就不用动了
-        if (curCallback != null && curCallback != status) {
-            val callback = callbacks[curCallback]
-            if (childCount > 1) removeAllViews()
-            callback?.onDetach()
+        callbacks[curCallback]?.let {
+            removeViewFromView(it.getDisplayView())
+            it.onDetach()
         }
-        val successCallback = callbacks[status]
-        if (successCallback == null) {
-            throwNoExits(status)
-        } else {
-            val displayView = successCallback.getDisplayView()
-            addView(displayView)
-            successCallback.onAttach(context, displayView)
-        }
+
+        callbacks[status]?.let {
+            val view = it.getDisplayView()
+            addViewFromView(view)
+            it.onAttach(view)
+        } ?: throwNoExits(status)
+
         curCallback = status
     }
 
+    // 得到这个class的View， 然后进行一些操作
     fun setCallBack(callback: KClass<out Callback>, transport: Transport) {
         callbacks[callback]?.obtainRootView()?.run {
             transport.order(context, this)
         } ?: throwNoExits(callback)
+    }
+
+    private fun removeViewFromView(view: View) {
+        val indexOfChild = indexOfChild(view)
+        if (indexOfChild > -1) {
+            removeViewAt(indexOfChild)
+        }
+    }
+
+    private fun addViewFromView(view: View) {
+        val indexOfChild = indexOfChild(view)
+        if (indexOfChild == -1) {
+            addView(view)
+        }
     }
 }

@@ -9,5 +9,8 @@ import android.view.View
  * Description:
  */
 interface Transport {
+    /**
+     * @param view 是要操作的这个View
+     */
     fun order(context: Context, view: View)
 }

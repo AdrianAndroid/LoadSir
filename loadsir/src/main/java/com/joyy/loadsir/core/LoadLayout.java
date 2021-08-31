@@ -40,15 +40,17 @@ public class LoadLayout extends FrameLayout {
         this.onReloadListener = onReloadListener;
     }
 
+    // 这里只调用一次， 就是SuccessCallback
     public void setupSuccessLayout(Callback callback) {
         addCallback(callback);
-        View successView = callback.getRootView();
+        View successView = callback.getRootView(); // 将View加进入并隐藏
         successView.setVisibility(View.INVISIBLE);
         addView(successView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));
         curCallback = SuccessCallback.class;
     }
 
+    // 设置其他的Callback
     public void setupCallback(Callback callback) {
         Callback cloneCallback = callback.copy();
         cloneCallback.setCallback(context, onReloadListener);

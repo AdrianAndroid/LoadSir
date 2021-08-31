@@ -46,6 +46,8 @@ class LoadService(
         }
     }
 
+    fun postDelayed(run: Runnable, delay: Long) = loadLayout.postDelayed(run, delay)
+
     fun getCurrentCallback() = loadLayout.curCallback
 
     /**
