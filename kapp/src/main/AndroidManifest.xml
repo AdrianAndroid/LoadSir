@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".target.FragmentSingleActivity"
+            android:exported="true" />
+        <activity
+            android:name=".target.ConvertActivity"
+            android:exported="true" />
+        <activity
+            android:name=".target.PlaceholderActivity"
+            android:exported="true" />
+        <activity
             android:name=".target.Normal2Activity"
             android:exported="true" />
         <activity

@@ -1,16 +1,16 @@
 package com.joyy.loadsir.core;
 
 
+import androidx.annotation.NonNull;
 import com.joyy.loadsir.LoadSirUtil;
 import com.joyy.loadsir.callback.Callback;
 import com.joyy.loadsir.target.ActivityTarget;
 import com.joyy.loadsir.target.ITarget;
 import com.joyy.loadsir.target.ViewTarget;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.NonNull;
+
 
 /**
  * Description:TODO

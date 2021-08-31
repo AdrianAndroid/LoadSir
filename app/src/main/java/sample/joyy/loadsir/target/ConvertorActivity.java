@@ -2,27 +2,23 @@ package com.joyy.loadsir.target;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
-
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+import com.joyy.loadsir.PostUtil;
+import com.joyy.loadsir.R;
 import com.joyy.loadsir.callback.EmptyCallback;
 import com.joyy.loadsir.callback.ErrorCallback;
 import com.joyy.loadsir.callback.LoadingCallback;
-
-import com.kingja.loadsir.callback.Callback;
-import com.kingja.loadsir.callback.SuccessCallback;
+import com.kingja.loadsir.core.Convertor;
 import com.kingja.loadsir.core.LoadService;
 import com.kingja.loadsir.core.LoadSir;
-
-import com.kingja.loadsir.core.Convertor;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import com.joyy.loadsir.R;
-import com.joyy.loadsir.PostUtil;
+
+
+
+
 
 
 /**

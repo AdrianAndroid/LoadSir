@@ -84,10 +84,8 @@ class LoadLayout(context: Context) : FrameLayout(context) {
     }
 
     // 得到这个class的View， 然后进行一些操作
-    fun setCallBack(callback: KClass<out Callback>, transport: Transport) {
-        callbacks[callback]?.obtainRootView()?.run {
-            transport.order(context, this)
-        } ?: throwNoExits(callback)
+    fun setCallBack(callback: KClass<out Callback>, transport: (View) -> Unit) {
+        callbacks[callback]?.obtainRootView()?.run(transport)
     }
 
     private fun removeViewFromView(view: View) {

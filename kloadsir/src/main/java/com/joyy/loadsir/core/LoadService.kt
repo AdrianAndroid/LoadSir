@@ -46,6 +46,11 @@ class LoadService(
         }
     }
 
+    fun showCallbackWithConvert(convert: () -> KClass<out Callback>) {
+        showCallback(convert())
+    }
+
+
     fun postDelayed(run: Runnable, delay: Long) = loadLayout.postDelayed(run, delay)
 
     fun getCurrentCallback() = loadLayout.curCallback
@@ -67,9 +72,16 @@ class LoadService(
         return newRootView
     }
 
-    fun setCallBack(callback: KClass<out Callback>, transport: Transport): LoadService {
+    fun transport(callback: KClass<out Callback>, transport: (View) -> Unit): LoadService {
         loadLayout.setCallBack(callback, transport)
         return this
     }
+
+//    fun <T> convert(convert: (t: T) -> Callback): LoadService {
+//        loadLayout.setCallBack(convert.invoke(t))
+//        return this
+//    }
+
+    fun getLoadLayout(): View = loadLayout
 
 }

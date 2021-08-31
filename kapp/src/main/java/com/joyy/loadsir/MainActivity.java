@@ -8,8 +8,10 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.joyy.loadsir.target.ConstraintLayoutActivity;
+import com.joyy.loadsir.target.FragmentSingleActivity;
 import com.joyy.loadsir.target.Normal2Activity;
 import com.joyy.loadsir.target.NormalActivity;
+import com.joyy.loadsir.target.PlaceholderActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,5 +31,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void inConstraintLayoutActivity(View view) {
         startActivity(new Intent(this, ConstraintLayoutActivity.class));
+    }
+
+    public void showPlaceholder(View view) {
+        startActivity(new Intent(this, PlaceholderActivity.class));
+    }
+
+    public void inFragment(View view) {
+        startActivity(new Intent(this, FragmentSingleActivity.class));
     }
 }
