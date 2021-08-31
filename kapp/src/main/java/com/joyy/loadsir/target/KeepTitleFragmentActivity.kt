@@ -38,10 +38,9 @@ class KeepTitleFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val contentView = rootView.findViewById<LinearLayout>(R.id.ll_content)
         LoadSir.createNewLoadSir(
-            LoadingCallback::class,
-            EmptyCallback(),
-            LoadingCallback()
-        ).register(contentView) { loadService, view ->
+            EmptyCallback::class,
+            LoadingCallback::class
+        ).setDefaultCallback(LoadingCallback::class).register(contentView) { loadService, view ->
             loadService.showCallback(LoadingCallback::class)
             loadService.showCallback(SuccessCallback::class, 2000)
         }.showCallback(EmptyCallback::class, 2000)

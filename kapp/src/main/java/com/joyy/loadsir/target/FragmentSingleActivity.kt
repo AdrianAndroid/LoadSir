@@ -35,11 +35,10 @@ class NormalFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val loadSir = LoadSir.createNewLoadSir(
+            CustomCallback::class,
             LoadingCallback::class,
-            CustomCallback(),
-            LoadingCallback(),
-            ErrorCallback()
-        )
+            ErrorCallback::class
+        ).setDefaultCallback(LoadingCallback::class)
 
         val rootView = inflater.inflate(R.layout.fragment_normal, container, false)
         loadService = loadSir.register(rootView) { loadService, view ->

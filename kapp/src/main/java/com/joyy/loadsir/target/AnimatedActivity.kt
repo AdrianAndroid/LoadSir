@@ -13,14 +13,16 @@ class AnimatedActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_animated)
 
-        LoadSir.createNewLoadSir(
-            AnimatedCallback::class,
-            EmptyCallback(),
-            AnimatedCallback()
-        ).register(this) { loadService, view ->
-            loadService.showCallback(AnimatedCallback::class)
-            loadService.showCallback(SuccessCallback::class, 2000)
-        }.showCallback(EmptyCallback::class, 2000)
+        LoadSir
+            .createNewLoadSir(
+                EmptyCallback::class,
+                AnimatedCallback::class
+            )
+            .setDefaultCallback(AnimatedCallback::class)
+            .register(this) { loadService, view ->
+                loadService.showCallback(AnimatedCallback::class)
+                loadService.showCallback(SuccessCallback::class, 2000)
+            }.showCallback(EmptyCallback::class, 2000)
 
     }
 }

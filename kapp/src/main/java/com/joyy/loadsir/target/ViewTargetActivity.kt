@@ -15,10 +15,9 @@ class ViewTargetActivity : AppCompatActivity() {
 
         val imageView: ImageView = findViewById(R.id.iv_img)
         val loadSir = LoadSir.createNewLoadSir(
-            LoadingCallback::class,
-            TimeoutCallback(),
-            LoadingCallback()
-        )
+            TimeoutCallback::class,
+            LoadingCallback::class
+        ).setDefaultCallback(LoadingCallback::class)
 
         val loadService = loadSir.register(imageView) { loadService, view ->
             loadService.showCallback(LoadingCallback::class)

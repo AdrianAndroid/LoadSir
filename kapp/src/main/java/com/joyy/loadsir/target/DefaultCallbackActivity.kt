@@ -23,10 +23,9 @@ class DefaultCallbackActivity : AppCompatActivity() {
         }
 
         LoadSir.createNewLoadSir(
-            ProgressCallback::class,
-            loadingCallBack,
-            hintCallback
-        ).register(this) { loadService, view ->
+            loadingCallBack::class,
+            hintCallback::class
+        ).setDefaultCallback(ProgressCallback::class).register(this) { loadService, view ->
             loadService.showCallback(ProgressCallback::class)
             loadService.postDelayed({ loadService.showSuccess() }, 2000)
         }.showCallback(HintCallback::class, 2000)

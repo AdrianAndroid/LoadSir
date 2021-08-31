@@ -10,6 +10,7 @@ import com.joyy.loadsir.callback.Callback
 import com.joyy.loadsir.callback.SuccessCallback
 import java.util.*
 import kotlin.reflect.KClass
+import kotlin.reflect.full.createInstance
 
 /**
  * Time:2021/8/30 10:42
@@ -48,8 +49,9 @@ class LoadLayout(context: Context) : FrameLayout(context) {
     }
 
     // 注册新的CallBack
-    fun setupCallback(targetCallback: Callback, callback: ((View) -> Unit)) {
-        val cloneCallback = targetCallback.copy()
+    fun setupCallback(targetCallback: KClass<out Callback>, callback: ((View) -> Unit)) {
+//        val cloneCallback = targetCallback.copy()
+        val cloneCallback = targetCallback.createInstance()
         cloneCallback.setCallback(context, callback)
         addCallback(callback = cloneCallback)
     }

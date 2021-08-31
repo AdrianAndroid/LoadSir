@@ -23,7 +23,7 @@ class LoadSir {
         // 创建一个独立的咯啊的
         fun createNewLoadSir(
             defaultCallback: KClass<out Callback>,
-            vararg callbacks: Callback
+            vararg callbacks: KClass<out Callback>
         ): LoadSir {
             val loadSir = LoadSir()
             loadSir.setDefaultCallback(defaultCallback)
@@ -35,7 +35,10 @@ class LoadSir {
 
 
         // 创建一个默认的loadsir
-        fun init(defaultCallback: KClass<out Callback>, vararg callbacks: Callback): LoadSir {
+        fun init(
+            defaultCallback: KClass<out Callback>,
+            vararg callbacks: KClass<out Callback>
+        ): LoadSir {
             commonSir.setDefaultCallback(defaultCallback)
             for (callback in callbacks) {
                 commonSir.addCallback(callback)
@@ -52,7 +55,7 @@ class LoadSir {
         }
     }
 
-    private val callbacks = ArrayList<Callback>()
+    private val callbacks = ArrayList<KClass<out Callback>>()
     private val targetContextList = ArrayList<ITarget>()
     private lateinit var defaultCallback: KClass<out Callback>
 
@@ -61,7 +64,7 @@ class LoadSir {
         targetContextList.add(ViewTarget())
     }
 
-    fun addCallback(@NonNull callback: Callback): LoadSir {
+    fun addCallback(@NonNull callback: KClass<out Callback>): LoadSir {
         callbacks.add(callback)
         return this
     }

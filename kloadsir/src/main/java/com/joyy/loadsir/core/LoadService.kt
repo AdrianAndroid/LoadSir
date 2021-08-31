@@ -15,7 +15,7 @@ import kotlin.reflect.KClass
  */
 class LoadService(
     private var loadLayout: LoadLayout,
-    callbacks: List<Callback>,
+    callbacks: List<KClass<out Callback>>,
     defaultCallback: KClass<out Callback>,
     private val onClick: ((LoadService, View) -> Unit)
 ) {
@@ -26,7 +26,7 @@ class LoadService(
 
     init {
         // 都先换成默认的Callback
-        callbacks.forEach { cb ->
+        callbacks.forEach { cb: KClass<out Callback> ->
             loadLayout.setupCallback(cb, _onClick)
         }
         loadLayout.showCallback(defaultCallback)

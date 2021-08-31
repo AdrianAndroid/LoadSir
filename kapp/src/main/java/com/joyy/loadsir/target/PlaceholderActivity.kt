@@ -13,7 +13,8 @@ class PlaceholderActivity : AppCompatActivity() {
 
 
         val loadSir =
-            LoadSir.createNewLoadSir(PlaceHolderCallback::class, PlaceHolderCallback())
+            LoadSir.createNewLoadSir(PlaceHolderCallback::class)
+                .setDefaultCallback(PlaceHolderCallback::class)
         val loadService = loadSir.register(this) { loadService, view ->
             // do retry logic ...
         }.transport(PlaceHolderCallback::class) {
