@@ -18,7 +18,7 @@ open class Callback : Serializable {
     open fun onCreateView(): Int = 0
     open fun onAttach(view: View) {}
     open fun onDetach() {}
-    open fun onRootView(): View? = null
+    open fun onCreateView(context: Context): View? = null
     open fun onReloadEvent(view: View): Boolean = false
     open fun onViewCreated(view: View) {}
 
@@ -37,12 +37,14 @@ open class Callback : Serializable {
         }
     }
 
+    open fun getMyContext(): Context = context
+
     fun obtainRootView(): View {
         if (::rootView.isInitialized) return rootView.apply {
             onClickEvent(this)
-            onViewCreated(this)
+            // onViewCreated(this) // 第一次创建的时候，才调用
         }
-        onRootView()?.let { rootView = it }
+        onCreateView(getMyContext())?.let { rootView = it }
         if (::rootView.isInitialized) return rootView.apply {
             onClickEvent(this)
             onViewCreated(this)

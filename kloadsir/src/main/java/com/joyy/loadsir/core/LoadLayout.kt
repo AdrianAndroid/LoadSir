@@ -65,7 +65,7 @@ class LoadLayout(context: Context) : FrameLayout(context) {
 
     // 更换LoadingView
     fun showCallbackView(status: KClass<out Callback>) {
-        log("preStatus = $status index=${indexOfChild(callbacks[curCallback]?.getDisplayView())} childCount=${childCount}")
+        //log("preStatus = $status index=${indexOfChild(callbacks[curCallback]?.getDisplayView())} childCount=${childCount}")
 
         // 先判断之前是否就是这个view，就不用动了
         callbacks[curCallback]?.let {

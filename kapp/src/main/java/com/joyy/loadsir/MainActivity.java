@@ -1,18 +1,20 @@
 package com.joyy.loadsir;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.joyy.loadsir.target.ConstraintLayoutActivity;
+import com.joyy.loadsir.target.DefaultCallbackActivity;
 import com.joyy.loadsir.target.FragmentMultiActivity;
+import com.joyy.loadsir.target.FragmentMultiViewPagerActivity;
 import com.joyy.loadsir.target.FragmentSingleActivity;
 import com.joyy.loadsir.target.Normal2Activity;
 import com.joyy.loadsir.target.NormalActivity;
 import com.joyy.loadsir.target.PlaceholderActivity;
+import com.joyy.loadsir.target.ViewTargetActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,4 +47,21 @@ public class MainActivity extends AppCompatActivity {
     public void inFragmentMutil(View view) {
         startActivity(new Intent(this, FragmentMultiActivity.class));
     }
+
+    public void inFragmentViewSirPager(View view) {
+        startActivity(new Intent(this, FragmentMultiViewPagerActivity.class));
+    }
+
+    public void viewTarget(View view) {
+        startActivity(new Intent(this, ViewTargetActivity.class));
+    }
+
+    public void defaultCallback(View view) {
+        startActivity(new Intent(this, DefaultCallbackActivity.class));
+    }
+
+    public void inActivityWithConvertor(View view) {
+    }
+
+
 }

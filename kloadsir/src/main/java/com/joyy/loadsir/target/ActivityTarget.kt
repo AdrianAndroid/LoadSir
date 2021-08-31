@@ -24,7 +24,9 @@ class ActivityTarget : ITarget {
             // Loading布局
             val loadLayout = LoadLayout(target)
             // 目的：为了回调
-            loadLayout.setupSuccessLayout(SuccessCallback(oldContent)/*保留原来的View*/)
+            loadLayout.setupSuccessLayout(SuccessCallback(oldContent).apply {
+                context = target
+            }/*保留原来的View*/)
             contentParent.addView(loadLayout, childIndex, lp)
             return loadLayout
         } else {

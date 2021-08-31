@@ -63,7 +63,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="inView"
+            android:onClick="viewTarget"
             android:text="@string/view_timeout"
             android:textAllCaps="false" />
 
