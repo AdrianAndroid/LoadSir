@@ -27,7 +27,7 @@ class ViewTarget : ITarget {
                 contentParent.addView(loadLayout, childIndex, lp)
                 return loadLayout
             } else {
-                val lp = target.layoutParams
+                //val lp = target.layoutParams
                 val loadLayout = LoadLayout(target.context)
                 loadLayout.setupSuccessLayout(SuccessCallback(target))
                 return loadLayout

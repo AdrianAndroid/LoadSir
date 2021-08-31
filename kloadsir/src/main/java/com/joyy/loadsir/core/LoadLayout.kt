@@ -5,7 +5,6 @@ import android.content.Context
 import android.os.Looper
 import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.joyy.loadsir.callback.Callback
 import com.joyy.loadsir.callback.SuccessCallback

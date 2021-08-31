@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.joyy.loadsir.target.ConstraintLayoutActivity;
+import com.joyy.loadsir.target.FragmentMultiActivity;
 import com.joyy.loadsir.target.FragmentSingleActivity;
 import com.joyy.loadsir.target.Normal2Activity;
 import com.joyy.loadsir.target.NormalActivity;
@@ -39,5 +40,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void inFragment(View view) {
         startActivity(new Intent(this, FragmentSingleActivity.class));
+    }
+
+    public void inFragmentMutil(View view) {
+        startActivity(new Intent(this, FragmentMultiActivity.class));
     }
 }

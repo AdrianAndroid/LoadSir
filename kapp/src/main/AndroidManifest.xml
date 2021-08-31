@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".target.FragmentMultiActivity"
+            android:exported="true" />
+        <activity
             android:name=".target.FragmentSingleActivity"
             android:exported="true" />
         <activity
