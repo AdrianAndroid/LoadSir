@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, PlaceholderActivity.class));
     }
 
+
     public void inActivityWithConvertor(View view) {
         startActivity(new Intent(this, ConvertorActivity.class));
     }
@@ -53,10 +54,10 @@ public class MainActivity extends AppCompatActivity {
     public void inFragmentMutil(View view) {
         startActivity(new Intent(this, MultiFragmentActivity.class));
     }
-
     public void inFragmentViewSirPager(View view) {
         startActivity(new Intent(this, MultiFragmentWithViewPagerActivity.class));
     }
+
 
     public void inView(View view) {
         startActivity(new Intent(this, ViewTargetActivity.class));
