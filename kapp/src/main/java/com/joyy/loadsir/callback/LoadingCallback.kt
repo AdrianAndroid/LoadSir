@@ -1,6 +1,5 @@
 package com.joyy.loadsir.callback
 
-import android.content.Context
 import android.view.View
 import com.joyy.loadsir.R
 

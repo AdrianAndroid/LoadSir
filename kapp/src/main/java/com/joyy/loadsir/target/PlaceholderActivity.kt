@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.joyy.loadsir.LoadSir
 import com.joyy.loadsir.R
 import com.joyy.loadsir.callback.PlaceHolderCallback
+import java.lang.IllegalArgumentException
 
 class PlaceholderActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -13,7 +14,15 @@ class PlaceholderActivity : AppCompatActivity() {
 
 
         val loadSir =
-            LoadSir.createNewLoadSir(PlaceHolderCallback::class, PlaceHolderCallback())
+            LoadSir.createNewLoadSir(
+                {
+                    when (it) {
+                        PlaceHolderCallback::class -> PlaceHolderCallback()
+                        else -> throw  IllegalArgumentException()
+                    }
+                },
+                PlaceHolderCallback::class
+            )
         val loadService = loadSir.register(this) { loadService, view ->
             // do retry logic ...
         }.transport(PlaceHolderCallback::class) {

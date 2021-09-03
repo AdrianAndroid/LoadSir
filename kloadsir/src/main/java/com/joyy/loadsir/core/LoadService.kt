@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import com.joyy.loadsir.CallBackFactory
 import com.joyy.loadsir.callback.Callback
 import com.joyy.loadsir.callback.SuccessCallback
 import kotlin.reflect.KClass
@@ -15,8 +16,9 @@ import kotlin.reflect.KClass
  */
 class LoadService(
     private var loadLayout: LoadLayout,
-    callbacks: List<Callback>,
+    callbacks: List<KClass<out Callback>>,
     defaultCallback: KClass<out Callback>,
+    factory: CallBackFactory,
     private val onClick: ((LoadService, View) -> Unit)
 ) {
 
@@ -27,7 +29,7 @@ class LoadService(
     init {
         // 都先换成默认的Callback
         callbacks.forEach { cb ->
-            loadLayout.setupCallback(cb, _onClick)
+            loadLayout.setupCallback(factory(cb), _onClick) // 直接创建一个对象
         }
         loadLayout.showCallback(defaultCallback)
     }

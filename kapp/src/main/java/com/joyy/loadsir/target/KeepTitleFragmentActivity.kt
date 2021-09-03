@@ -15,6 +15,7 @@ import com.joyy.loadsir.callback.EmptyCallback
 import com.joyy.loadsir.callback.LoadingCallback
 import com.joyy.loadsir.callback.SuccessCallback
 import com.joyy.loadsir.core.LoadService
+import java.lang.IllegalArgumentException
 
 
 class KeepTitleFragmentActivity : AppCompatActivity() {
@@ -38,9 +39,15 @@ class KeepTitleFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val contentView = rootView.findViewById<LinearLayout>(R.id.ll_content)
         LoadSir.createNewLoadSir(
+            {
+                when (it) {
+                    LoadingCallback::class -> LoadingCallback()
+                    EmptyCallback::class -> EmptyCallback()
+                    else -> throw IllegalArgumentException()
+                }
+            },
             LoadingCallback::class,
-            EmptyCallback(),
-            LoadingCallback()
+            EmptyCallback::class
         ).register(contentView) { loadService, view ->
             loadService.showCallback(LoadingCallback::class)
             loadService.showCallback(SuccessCallback::class, 2000)

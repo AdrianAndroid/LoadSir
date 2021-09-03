@@ -13,6 +13,7 @@ import com.joyy.loadsir.callback.EmptyCallback
 import com.joyy.loadsir.callback.ErrorCallback
 import com.joyy.loadsir.callback.LoadingCallback
 import com.joyy.loadsir.core.LoadService
+import java.lang.IllegalArgumentException
 
 class FragmentSingleActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,10 +36,17 @@ class NormalFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val loadSir = LoadSir.createNewLoadSir(
+            {
+                when (it) {
+                    LoadingCallback::class -> LoadingCallback()
+                    CustomCallback::class -> CustomCallback()
+                    ErrorCallback::class -> ErrorCallback()
+                    else -> throw IllegalArgumentException("")
+                }
+            },
             LoadingCallback::class,
-            CustomCallback(),
-            LoadingCallback(),
-            ErrorCallback()
+            CustomCallback::class,
+            ErrorCallback::class
         )
 
         val rootView = inflater.inflate(R.layout.fragment_normal, container, false)

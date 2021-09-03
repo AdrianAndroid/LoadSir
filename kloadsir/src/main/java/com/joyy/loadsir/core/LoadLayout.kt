@@ -49,9 +49,9 @@ class LoadLayout(context: Context) : FrameLayout(context) {
 
     // 注册新的CallBack
     fun setupCallback(targetCallback: Callback, callback: ((View) -> Unit)) {
-        val cloneCallback = targetCallback.copy()
-        cloneCallback.setCallback(context, callback)
-        addCallback(callback = cloneCallback)
+//        val cloneCallback = targetCallback.copy()
+        targetCallback.setCallback(context, callback)
+        addCallback(callback = targetCallback)
     }
 
     fun showCallback(callback: KClass<out Callback>) {

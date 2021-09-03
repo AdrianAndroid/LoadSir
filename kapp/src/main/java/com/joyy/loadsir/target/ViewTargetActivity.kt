@@ -7,6 +7,7 @@ import com.joyy.loadsir.LoadSir
 import com.joyy.loadsir.R
 import com.joyy.loadsir.callback.LoadingCallback
 import com.joyy.loadsir.callback.TimeoutCallback
+import java.lang.IllegalArgumentException
 
 class ViewTargetActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,9 +16,15 @@ class ViewTargetActivity : AppCompatActivity() {
 
         val imageView: ImageView = findViewById(R.id.iv_img)
         val loadSir = LoadSir.createNewLoadSir(
+            {
+                when (it) {
+                    LoadingCallback::class -> LoadingCallback()
+                    TimeoutCallback::class -> TimeoutCallback()
+                    else -> throw IllegalArgumentException()
+                }
+            },
             LoadingCallback::class,
-            TimeoutCallback(),
-            LoadingCallback()
+            TimeoutCallback::class
         )
 
         val loadService = loadSir.register(imageView) { loadService, view ->

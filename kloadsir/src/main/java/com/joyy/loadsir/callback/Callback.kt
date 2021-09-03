@@ -63,17 +63,17 @@ open class Callback : Serializable {
         this.onClickCallback = onReload // 点击的回调
     }
 
-    fun copy(): Callback {
-        val bao = ByteArrayOutputStream()
-        val oos = ObjectOutputStream(bao)
-        oos.writeObject(this)
-        oos.close()
-        val bis = ByteArrayInputStream(bao.toByteArray())
-        val ois = ObjectInputStream(bis)
-        val obj = ois.readObject()
-        ois.close()
-
-        return obj as Callback
-    }
+//    fun copy(): Callback {
+//        val bao = ByteArrayOutputStream()
+//        val oos = ObjectOutputStream(bao)
+//        oos.writeObject(this)
+//        oos.close()
+//        val bis = ByteArrayInputStream(bao.toByteArray())
+//        val ois = ObjectInputStream(bis)
+//        val obj = ois.readObject()
+//        ois.close()
+//
+//        return obj as Callback
+//    }
 
 }

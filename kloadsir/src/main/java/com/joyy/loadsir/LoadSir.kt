@@ -3,6 +3,8 @@ package com.joyy.loadsir
 import android.view.View
 import androidx.annotation.NonNull
 import com.joyy.loadsir.callback.Callback
+import com.joyy.loadsir.callback.ProgressCallback
+import com.joyy.loadsir.callback.SuccessCallback
 import com.joyy.loadsir.core.LoadService
 import com.joyy.loadsir.target.ActivityTarget
 import com.joyy.loadsir.target.ITarget
@@ -16,43 +18,66 @@ import kotlin.reflect.KClass
  * Description:
  * // 范型 : https://www.jianshu.com/p/671184ce18fc
  */
+
+typealias CallBackFactory = (kclass: KClass<out Callback>) -> Callback
+
 class LoadSir {
     companion object {
 
 
         // 创建一个独立的咯啊的
         fun createNewLoadSir(
-            defaultCallback: KClass<out Callback>,
-            vararg callbacks: Callback
+            factory: CallBackFactory,
+            vararg callbacks: KClass<out Callback>
         ): LoadSir {
             val loadSir = LoadSir()
-            loadSir.setDefaultCallback(defaultCallback)
             for (callback in callbacks) {
                 loadSir.addCallback(callback)
             }
+            // 默认的第一个
+            if (callbacks.isNotEmpty()) loadSir.setDefaultCallback(callbacks.first())
+            loadSir.setCallBackFactory(factory)
             return loadSir
         }
 
 
-        // 创建一个默认的loadsir
-        fun init(defaultCallback: KClass<out Callback>, vararg callbacks: Callback): LoadSir {
-            commonSir.setDefaultCallback(defaultCallback)
-            for (callback in callbacks) {
-                commonSir.addCallback(callback)
+        fun loadSirFactory(
+            factory: (kclass: KClass<out Callback>) -> Callback,
+            vararg callbacks: KClass<out Callback>
+        ): LoadSir {
+            // 添加所有的callback
+            callbacks.forEach { k ->
+                sir.addCallback(callback = k)
             }
-            return commonSir
+            if (callbacks.isNotEmpty()) sir.setDefaultCallback(callbacks.first())
+            sir.setCallBackFactory(factory)
+            return sir
+        }
+
+        // 创建一个默认的loadsir
+        fun init(
+            defaultCallback: KClass<out Callback>,
+            vararg callbacks: KClass<out Callback>
+        ): LoadSir {
+            sir.setDefaultCallback(defaultCallback)
+            for (callback in callbacks) {
+                sir.addCallback(callback)
+            }
+            return sir
         }
 
         fun register(@NonNull target: Any, onClick: (LoadService, View) -> Unit): LoadService {
-            return commonSir.register(target, onClick)
+            return sir.register(target, onClick)
         }
 
-        val commonSir: LoadSir by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
+        private val sir: LoadSir by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
             LoadSir()
         }
     }
 
-    private val callbacks = ArrayList<Callback>()
+
+    private var callbackFactory: ((KClass<out Callback>) -> Callback) = { _ -> ProgressCallback() }
+    private val callbacks = ArrayList<KClass<out Callback>>()
     private val targetContextList = ArrayList<ITarget>()
     private lateinit var defaultCallback: KClass<out Callback>
 
@@ -61,7 +86,7 @@ class LoadSir {
         targetContextList.add(ViewTarget())
     }
 
-    fun addCallback(@NonNull callback: Callback): LoadSir {
+    fun addCallback(@NonNull callback: KClass<out Callback>): LoadSir {
         callbacks.add(callback)
         return this
     }
@@ -81,7 +106,7 @@ class LoadSir {
         val targetContext: ITarget = getTargetContext(target, targetContextList) // ITarget
         // 需要的LoadLayout：（包括：1。 loading框 2。原先的的那个view
         val loadLayout = targetContext.replaceView(target)
-        return LoadService(loadLayout, callbacks, defaultCallback, onClick)
+        return LoadService(loadLayout, callbacks, defaultCallback, callbackFactory, onClick)
     }
 
     /**
@@ -94,6 +119,11 @@ class LoadSir {
             }
         }
         throw IllegalArgumentException("No TargetContext fit it")
+    }
+
+
+    private fun setCallBackFactory(factory: (kclass: KClass<out Callback>) -> Callback) {
+        this.callbackFactory = factory
     }
 
     private fun getTargetList() = targetContextList
