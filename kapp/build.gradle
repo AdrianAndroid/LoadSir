@@ -11,6 +11,19 @@ android {
         versionCode VERSION_CODE as int
         versionName VERSION_NAME
     }
+    flavorDimensions 'app'
+    productFlavors {
+        main {
+            dimension 'app'
+        }
+        vivo {
+            dimension 'app'
+        }
+        oppo {
+            dimension 'app'
+        }
+
+    }
     buildTypes {
         release {
             minifyEnabled true
